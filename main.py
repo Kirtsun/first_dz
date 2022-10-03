@@ -20,14 +20,12 @@ def parse_cookie(query: str) -> dict:
     a = query.find('=')
     b = query.find(' ')
     query_new = query[:a] + ' ' + query[(a + 1):b]
-    query = query[b:].replace('=', ' ')
-    query = query_new + query
+    query = query_new + query[b:].replace('=', ' ')
     query = query.split()
     key = query[::2]
     value = query[1::2]
     dict_one = {key[i]: value[i] for i in range(len(key))}
     return dict_one
-
 
 
 if __name__ == '__main__':
