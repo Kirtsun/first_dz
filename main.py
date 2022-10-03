@@ -19,15 +19,19 @@ def parse_cookie(query: str) -> dict:
     query = query.replace(';', ' ')
     a = query.find('=')
     b = query.find(' ')
-    query = query[:a] + ' ' + query[(a + 1):]
+    query_new = query[:a] + ' ' + query[(a + 1):b]
+    query = query[b:].replace('=', ' ')
+    query = query_new + query
     query = query.split()
-
-    print(query)
+    key = query[::2]
+    value = query[1::2]
+    dict_one = {key[i]: value[i] for i in range(len(key))}
+    return dict_one
 
 
 
 if __name__ == '__main__':
     assert parse_cookie('name=Dima;') == {'name': 'Dima'}
     assert parse_cookie('') == {}
-    # assert parse_cookie('name=Dima;age=28;') == {'name': 'Dima', 'age': '28'}
+    assert parse_cookie('name=Dima;age=28;') == {'name': 'Dima', 'age': '28'}
     assert parse_cookie('name=Dima=User;age=28;') == {'name': 'Dima=User', 'age': '28'}
