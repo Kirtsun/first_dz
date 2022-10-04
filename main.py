@@ -24,10 +24,10 @@ def parse(query: str) -> dict:
     return dict_one
 
 if __name__ == '__main__':
-    # assert parse('https://example.com/path/to/page?name=ferret&color=purple') == {'name': 'ferret', 'color': 'purple'}
-    # assert parse('https://example.com/path/to/page?name=ferret&color=purple&') == {'name': 'ferret', 'color': 'purple'}
-    # assert parse('http://example.com/') == {}
-    # assert parse('http://example.com/?') == {}
+    assert parse('https://example.com/path/to/page?name=ferret&color=purple') == {'name': 'ferret', 'color': 'purple'}
+    assert parse('https://example.com/path/to/page?name=ferret&color=purple&') == {'name': 'ferret', 'color': 'purple'}
+    assert parse('http://example.com/') == {}
+    assert parse('http://example.com/?') == {}
     assert parse('http://example.com/?name=Dima') == {'name': 'Dima'}
     assert parse('http://example.com/?name=Dima=user') == {'name': 'Dima=user'}
     assert parse('https://example.com/path/to/page?name=ferret=kaystra&color=purple=orange&') == {'name': 'ferret=kaystra',
@@ -41,12 +41,9 @@ if __name__ == '__main__':
     assert parse('https://example.com/path/to/page?name=ferret&color=purple=green&parse=parse=98746&') == {'name': 'ferret',
                                                                                               'color': 'purple=green',
                                                                                               'parse': 'parse=98746'}
-    assert parse()
-    assert parse()
-    assert parse()
-    assert parse()
-    assert parse()
-    assert parse()
+    assert parse('https://example.com/path/to/page?у=меня&уже=не=хватает&фантазии=ага') == {'у': 'меня',
+                                                                                            'уже': 'не=хватает',
+                                                                                            'фантазии': 'ага'}
 
 
 def parse_cookie(query: str) -> dict:
